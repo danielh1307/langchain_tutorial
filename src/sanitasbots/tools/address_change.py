@@ -1,8 +1,7 @@
-from langchain_core.tools import tool
+import os
 
 import requests
-
-token = "abc"
+from langchain_core.tools import tool
 
 
 @tool
@@ -21,7 +20,7 @@ def get_coverage(topic: str):
     url = "https://api3.sanitas.com/coveragecheck/v3/topic-coverage/" + topic
     print("Call " + url)
     headers = {
-        "Authorization": f"Bearer {token}"
+        "Authorization": f"Bearer {os.environ['SANITAS_TOKEN']}"
     }
 
     response = requests.get(url, headers=headers)
